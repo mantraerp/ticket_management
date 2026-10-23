@@ -15,6 +15,7 @@ DEFAULT_MODULES = [
 	"Employee Portal",
 	"Servico",
 	"Payment",
+	"Dispatch",
 	"Other",
 ]
 DEFAULT_TYPES = ["Permission", "Data issue", "Other"]
