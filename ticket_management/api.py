@@ -10,15 +10,15 @@ logged-in user:
     submit_ticket()    creates the Ticket and saves the uploaded files on it as private files
     get_my_tickets()   the user's own Tickets, newest first
 
-Ticket.before_insert fills in who raised it (User / Employee) and where from (IP, page, browser).
-Ticket permissions: the "All" role may create Tickets and read its own, so everything here runs
+My Ticket.before_insert fills in who raised it (User / Employee) and where from (IP, page, browser).
+My Ticket permissions: the "All" role may create Tickets and read its own, so everything here runs
 with the user's own permissions; only the attachments are saved on their behalf.
 """
 
 import frappe
 from frappe.utils import escape_html
 
-TICKET_DOCTYPE = "Ticket"
+TICKET_DOCTYPE = "My Ticket"
 MAX_ATTACHMENTS = 10
 MAX_FILE_MB = 10
 MAX_TOTAL_MB = 25
@@ -29,7 +29,7 @@ MY_TICKETS_LIMIT = 50
 
 
 def _choices(fieldname):
-	"""Choices of a Select field on Ticket."""
+	"""Choices of a Select field on My Ticket."""
 	field = frappe.get_meta(TICKET_DOCTYPE).get_field(fieldname)
 	return [o.strip() for o in ((field.options or "").split("\n") if field else []) if o.strip()]
 

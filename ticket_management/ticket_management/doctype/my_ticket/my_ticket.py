@@ -5,7 +5,7 @@ import frappe
 from frappe.model.document import Document
 
 
-class Ticket(Document):
+class MyTicket(Document):
 	def before_insert(self):
 		self.set_raised_by()
 		self.set_source()

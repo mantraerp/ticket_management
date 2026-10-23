@@ -1,0 +1,109 @@
+{
+ "actions": [],
+ "autoname": "format:{ticket}-R-{###}",
+ "creation": "2026-10-23 12:00:00.000000",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "ticket",
+  "ticket_subject",
+  "column_break_replied_by",
+  "replied_by",
+  "replied_by_name",
+  "replied_on",
+  "reply_section",
+  "reply"
+ ],
+ "fields": [
+  {
+   "fieldname": "ticket",
+   "fieldtype": "Link",
+   "label": "Ticket",
+   "options": "My Ticket",
+   "reqd": 1,
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "search_index": 1
+  },
+  {
+   "fieldname": "ticket_subject",
+   "fieldtype": "Data",
+   "label": "Ticket Subject",
+   "fetch_from": "ticket.subject",
+   "read_only": 1,
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "column_break_replied_by",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "replied_by",
+   "fieldtype": "Link",
+   "label": "Replied By",
+   "options": "User",
+   "read_only": 1,
+   "in_standard_filter": 1
+  },
+  {
+   "fieldname": "replied_by_name",
+   "fieldtype": "Data",
+   "label": "Replied By Name",
+   "read_only": 1,
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "replied_on",
+   "fieldtype": "Datetime",
+   "label": "Replied On",
+   "default": "now",
+   "read_only": 1
+  },
+  {
+   "fieldname": "reply_section",
+   "fieldtype": "Section Break",
+   "label": "Reply"
+  },
+  {
+   "fieldname": "reply",
+   "fieldtype": "Text Editor",
+   "label": "Reply",
+   "reqd": 1
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2026-10-23 12:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "Ticket Management",
+ "name": "My Ticket Reply",
+ "naming_rule": "Expression",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "role": "System Manager",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "delete": 1,
+   "report": 1,
+   "export": 1,
+   "print": 1,
+   "email": 1,
+   "share": 1
+  },
+  {
+   "role": "All",
+   "read": 1,
+   "create": 1,
+   "report": 1,
+   "print": 1
+  }
+ ],
+ "search_fields": "ticket,ticket_subject",
+ "sort_field": "creation",
+ "sort_order": "DESC",
+ "states": [],
+ "title_field": "ticket_subject",
+ "track_changes": 1
+}
