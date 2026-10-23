@@ -20,12 +20,20 @@ class MyTicket(Document):
 			self.browser = self.browser or frappe.request.headers.get("User-Agent")
 
 	def validate(self):
+		self.validate_enabled("module", "Ticket Module")
+		self.validate_enabled("issue_type", "Ticket Type")
 		self.subject = (self.subject or "").strip()
 		self.description = (self.description or "").strip()
 		if not self.subject:
 			frappe.throw("Subject is required.")
 		if not self.description:
 			frappe.throw("Description is required.")
+
+	def validate_enabled(self, fieldname, master):
+		"""A new or changed Module / Type must be enabled; old tickets keep a value disabled later."""
+		value = self.get(fieldname)
+		if value and self.has_value_changed(fieldname) and not frappe.db.get_value(master, value, "enabled"):
+			frappe.throw(f"{master} {value} is disabled.")
 
 	def set_raised_by(self):
 		"""Who raised the ticket: User record, plus their Employee record when there is one."""

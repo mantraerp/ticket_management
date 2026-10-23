@@ -83,7 +83,7 @@ app_license = "mit"
 # ------------
 
 # before_install = "ticket_management.install.before_install"
-# after_install = "ticket_management.install.after_install"
+after_install = "ticket_management.install.after_install"
 
 # Uninstallation
 # ------------

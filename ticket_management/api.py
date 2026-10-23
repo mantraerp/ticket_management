@@ -5,8 +5,8 @@ The "Raise a Ticket" form that every ERP portal shows (mantra/templates/includes
 calls this module by default. The portals run on the same site, so tickets are created as the
 logged-in user:
 
-    get_options()      Module / Type choices (read from the Ticket doctype, so the form always
-                       matches it) and the attachment limits
+    get_options()      Module / Type choices (the enabled Ticket Module / Ticket Type records,
+                       managed from the desk) and the attachment limits
     submit_ticket()    creates the Ticket and saves the uploaded files on it as private files
     get_my_tickets()   the user's own Tickets, newest first
 
@@ -29,9 +29,9 @@ MY_TICKETS_LIMIT = 50
 
 
 def _choices(fieldname):
-	"""Choices of a Select field on My Ticket."""
-	field = frappe.get_meta(TICKET_DOCTYPE).get_field(fieldname)
-	return [o.strip() for o in ((field.options or "").split("\n") if field else []) if o.strip()]
+	"""Enabled records of the master a My Ticket Link field points to (Ticket Module / Ticket Type)."""
+	master = frappe.get_meta(TICKET_DOCTYPE).get_field(fieldname).options
+	return frappe.get_all(master, filters={"enabled": 1}, pluck="name", order_by="creation asc")
 
 
 def _require_login():
